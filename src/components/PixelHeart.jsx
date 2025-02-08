@@ -1,8 +1,8 @@
-import { Box } from "@react-three/drei";
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
+import { CreatePixelHeart } from "./CreatePixelHeart";
 
-const grid = [
+const heartPixelGrid = [
   [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
   [0, 1, 2, 2, 2, 1, 0, 1, 2, 2, 2, 1, 0],
   [1, 2, 3, 3, 2, 2, 1, 2, 2, 2, 2, 2, 1],
@@ -17,12 +17,7 @@ const grid = [
   [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
 ];
 
-const boxSize = 0.3;
-
-const colors = {
-  1: "#1A1A19",
-  3: "#FFFFFF",
-};
+export const BOX_SIZE = 0.3;
 
 export function PixelHeart({ heartColor }) {
   const groupRef = useRef();
@@ -33,28 +28,22 @@ export function PixelHeart({ heartColor }) {
     }
   });
 
-  const offsetX = (grid[0].length * boxSize) / 2;
-  const offsetY = (grid.length * boxSize) / 2;
+  const offsetX = (heartPixelGrid[0].length * BOX_SIZE) / 2;
+  const offsetY = (heartPixelGrid.length * BOX_SIZE) / 2;
 
   return (
     <group ref={groupRef}>
-      {grid.map((row, y) =>
-        row.map((value, x) => {
-          if (value !== 0) {
-            return (
-              <Box
-                key={`${x}-${y}`}
-                position={[x * boxSize - offsetX, -y * boxSize + offsetY, 0]}
-                args={[boxSize, boxSize, boxSize]}
-              >
-                <meshStandardMaterial
-                  color={value === 2 ? heartColor : colors[value]}
-                />
-              </Box>
-            );
-          }
-          return null;
-        })
+      {heartPixelGrid.map((row, y) =>
+        row.map((pixelValue, x) =>
+          CreatePixelHeart({
+            x,
+            y,
+            pixelValue,
+            offsetX,
+            offsetY,
+            heartColor,
+          })
+        )
       )}
     </group>
   );
