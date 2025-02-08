@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { CreatePixelHeart } from "./CreatePixelHeart";
+import { CreatePixelHeart } from "./createPixelHeart";
 
 const heartPixelGrid = [
   [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
