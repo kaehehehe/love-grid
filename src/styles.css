@@ -1,0 +1,13 @@
+html,
+body,
+#root {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(255, 222, 239, 1) 0%,
+    rgba(254, 237, 245, 1) 48.5%,
+    rgba(239, 175, 186, 0.5) 100.2%
+  );
+}
