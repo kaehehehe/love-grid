@@ -1,17 +1,43 @@
 import React from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 import "./styles.css";
-import { PixelHeart } from "./components/PixelHeart";
+import { HeartCanvas } from "./components/HeartCanvas";
+
+const heartColorSets = [
+  {
+    background: "#FFCAD4",
+    heart: "#d80032",
+  },
+  {
+    background: "#ECFFE6",
+    heart: "#399918",
+  },
+  {
+    background: "#BBE9FF",
+    heart: "#0D92F4",
+  },
+  {
+    background: "#FFE1FF",
+    heart: "#7E60BF",
+  },
+];
 
 const App = () => {
   return (
-    <Canvas camera={{ position: [0, 0, 10], fov: 75 }}>
-      <ambientLight intensity={1} />
-      <directionalLight position={[0, 0, 5]} intensity={1} />
-      <PixelHeart />
-      <OrbitControls minDistance={3} maxDistance={40} />
-    </Canvas>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gridTemplateRows: "1fr 1fr",
+      }}
+    >
+      {heartColorSets.map((colors, index) => (
+        <HeartCanvas
+          key={index}
+          backgroundColor={colors.background}
+          heartColor={colors.heart}
+        />
+      ))}
+    </div>
   );
 };
 
